@@ -178,6 +178,7 @@ if (${CATKIN_ENABLE_TESTING})
   # Image to SDF node
   add_executable(image_2d_sdf_node src/image_2d_sdf_node.cpp)
   add_dependencies(image_2d_sdf_node ${catkin_EXPORTED_TARGETS})
+  target_include_directories(image_2d_sdf_node PUBLIC ${OpenCV_INCLUDE_DIR})
   target_link_libraries(image_2d_sdf_node ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
   # Tutorial on how to use the components of the sdf_tools library
@@ -186,11 +187,9 @@ if (${CATKIN_ENABLE_TESTING})
   target_link_libraries(sdf_tools_tutorial ${catkin_LIBRARIES} ${PROJECT_NAME})
 endif()
 
-
 #####################
 ## Python Bindings ##
 #####################
-
 if (${SDF_TOOLS_PYTHON_BINDINGS})
     pybind11_add_module(pysdf_tools src/sdf_tools/bindings.cpp)
     target_link_libraries(pysdf_tools sdf_tools)
